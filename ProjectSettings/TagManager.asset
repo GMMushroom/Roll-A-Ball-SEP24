@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Text UI
+    uniqueID: 556737773
+    locked: 0
+  - name: Win Image
+    uniqueID: 1261704659
+    locked: 0
