@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
     public GameObject inGamePanel;
     public GameObject winPanel;
 
+    public AudioSource bgmPlayer;
+    public AudioSource sfxPlayer;
+    public AudioClip winMusic;
+    public AudioClip pickupGet;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +38,11 @@ public class PlayerController : MonoBehaviour
         //Assign the total amount of pickups
         totalPickups = pickupCount;
 
+        //Resetting fillAmount
         pickupImage.fillAmount = 0;
 
         pickupChunk = 1.0f / pickupCount;
+
         //Run the CheckPickups() function
         CheckPickups();
         //Gets the timer Object
@@ -75,6 +82,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
+            //Play pickupGet sound
+            sfxPlayer.Play();
             //Destroy collided object
             Destroy(other.gameObject);
             //Decrement pickupCount
@@ -110,6 +119,9 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
+
+        bgmPlayer.clip = winMusic;
+        bgmPlayer.Play();
     }
 
     //Temporary Restart Function
