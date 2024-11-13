@@ -15,6 +15,10 @@ public class PlayerController : MonoBehaviour
     private int totalPickups;
     private float pickupChunk;
 
+    GameObject resetPoint;
+    bool resetting = false;
+    Color originalColor;
+
     [Header("UI")]
     public TMP_Text pickupText;
     public TMP_Text timerText;
@@ -40,8 +44,11 @@ public class PlayerController : MonoBehaviour
 
         //Resetting fillAmount
         pickupImage.fillAmount = 0;
-
+        //Fill according to amount of Pickups in the stage
         pickupChunk = 1.0f / pickupCount;
+
+        resetPoint = GameObject.Find("Reset Point");
+        originalColor = GetComponent<Renderer>().material.color;
 
         //Run the CheckPickups() function
         CheckPickups();
@@ -64,6 +71,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (resetting)
+            return;
         if (gameOver == true)
             return;
 
@@ -108,6 +117,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Respawn"))
+        {
+            StartCoroutine(ResetPlayer());
+        }
+    }
+
     private void WinGame()
     {
         //pickupText.color = Color.green;
@@ -122,6 +139,25 @@ public class PlayerController : MonoBehaviour
 
         bgmPlayer.clip = winMusic;
         bgmPlayer.Play();
+    }
+
+    public IEnumerator ResetPlayer()
+    {
+        resetting = true;
+        GetComponent<Renderer>().material.color = Color.black;
+        rb.velocity = Vector3.zero;
+        Vector3 startPos = transform.position;
+        float resetSpeed = 2f;
+        var i = 0f;
+        var rate = 1.0f / resetSpeed;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            transform.position = Vector3.Lerp(startPos, resetPoint.transform.position, i);
+            yield return null;
+        }
+        GetComponent<Renderer>().material.color = originalColor;
+        resetting = false;
     }
 
     //Temporary Restart Function
