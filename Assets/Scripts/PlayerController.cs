@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,12 +13,14 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     private Timer timer;
     private bool gameOver = false;
-    private int totalPickups;
     private float pickupChunk;
 
     GameObject resetPoint;
     bool resetting = false;
     Color originalColor;
+
+    GameObject hiddenWalls;
+    GameObject hiddenRamps;
 
     [Header("UI")]
     public TMP_Text pickupText;
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public GameObject inGamePanel;
     public GameObject winPanel;
 
+    [Header("Audio")]
     public AudioSource bgmPlayer;
     public AudioSource sfxPlayer;
     public AudioClip winMusic;
@@ -39,8 +43,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //Get the number of pickups in our scene
         pickupCount = GameObject.FindGameObjectsWithTag("Pickup").Length;
-        //Assign the total amount of pickups
-        totalPickups = pickupCount;
 
         //Resetting fillAmount
         pickupImage.fillAmount = 0;
@@ -61,6 +63,16 @@ public class PlayerController : MonoBehaviour
         inGamePanel.SetActive(true);
         //Return game state
         gameOver = false;
+
+        //Hidden Walls & Ramps Hotfix
+        hiddenWalls = GameObject.FindGameObjectWithTag("HiddenWalls");
+        hiddenRamps = GameObject.FindGameObjectWithTag("HiddenRamp");
+
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            hiddenWalls.SetActive(true);
+            hiddenRamps.SetActive(false);
+        }
     }
 
     private void Update()
@@ -114,6 +126,15 @@ public class PlayerController : MonoBehaviour
         {
             timer.StopTimer();
             WinGame();
+        }
+
+        if (pickupCount == 1)
+        {
+            if (SceneManager.GetActiveScene().name == "Level1")
+            {
+                hiddenWalls.SetActive(false);
+                hiddenRamps.SetActive(true);
+            }
         }
     }
 
