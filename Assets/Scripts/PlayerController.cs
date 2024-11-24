@@ -36,6 +36,9 @@ public class PlayerController : MonoBehaviour
     public AudioClip winMusic;
     public AudioClip pickupGet;
 
+    //Controllers
+    GameController gameController; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
         resetPoint = GameObject.Find("Reset Point");
         originalColor = GetComponent<Renderer>().material.color;
+
+        gameController = FindObjectOfType<GameController>();
 
         //Run the CheckPickups() function
         CheckPickups();
@@ -84,6 +89,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (resetting)
+            return;
+        if (gameController.controlType == ControlType.Worldtilt)
             return;
         if (gameOver == true)
             return;
