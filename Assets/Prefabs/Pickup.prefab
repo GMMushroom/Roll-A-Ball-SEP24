@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4272285198607627872}
   - component: {fileID: 1960258543654275584}
   - component: {fileID: 7462714544658834678}
+  - component: {fileID: 4967376393192564523}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Pickup
@@ -238,8 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cf7aa8851181744a10e132f2fd6dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
   speed: 5
-  rotationValue: {x: 15, y: 30, z: 45}
+  toRotation: {x: 15, y: 30, z: 45}
+  rotateType: 1
 --- !u!82 &7462714544658834678
 AudioSource:
   m_ObjectHideFlags: 0
@@ -336,3 +339,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4967376393192564523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7699120984807892331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f182403790b762c469daf58863823a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particlePrefab: {fileID: 5288918627272537906, guid: 01eed4d9d00c48a488f760fff7ce285f,
+    type: 3}

@@ -2664,8 +2664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cf7aa8851181744a10e132f2fd6dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
   speed: 0.1
-  rotationValue: {x: 15, y: 15, z: 0}
+  toRotation: {x: 15, y: 30, z: 45}
+  rotateType: 1
 --- !u!1 &1842109109
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,8 +3065,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cf7aa8851181744a10e132f2fd6dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
   speed: 0.1
-  rotationValue: {x: -15, y: 0, z: -18}
+  toRotation: {x: 15, y: 30, z: 45}
+  rotateType: 0
 --- !u!1 &1921144020
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,6 +110,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Pickup"))
         {
+            //Play Particles Effect
+            other.GetComponent<Particles>().CreateParticles();
             //Play pickupGet sound
             sfxPlayer.Play();
             //Destroy collided object
