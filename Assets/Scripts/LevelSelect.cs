@@ -12,6 +12,8 @@ public class LevelSelect : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         levelSelectPanel.SetActive(false);
+        //Quick Timescale fix
+        Time.timeScale = 1.0f;
     }
 
     public void ToLevelSelect()

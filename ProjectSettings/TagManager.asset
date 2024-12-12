@@ -9,6 +9,7 @@ TagManager:
   - Wall
   - HiddenWalls
   - HiddenRamp
+  - Teleporter
   layers:
   - Default
   - TransparentFX
